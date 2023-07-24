@@ -1,0 +1,39 @@
+<%- include('./header.ejs')  %>
+<section> <!---section start-->
+    <div class="container-fluid mt-5  ">
+        <div class="container  ">
+            <div class="row text-center  ">
+                <div class="col-md-4 box p-3 mb-2 shadowlg ">
+                    <div class="minbox p-3 ">
+                        <a href=""><i class="fa-solid fa-user pb-1 "></i></a>
+                        <h2 style="color: #fff;"> Student</h2>
+                        <p style="color: #fff;">Student can manage or view Their Grievance Here..</p>
+                        <a href="/student_login"><button class="btn btn-primary"
+                                style="background-color: #f3aa92;border: none;">Login</button></a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 box p-3 mb-2 shadowlg">
+                    <div class="minbox p-3 ">
+                        <a href=""><i class="fa-solid fa-user-tie pb-1 "></i></a>
+                        <h2 style="color: #fff;"> Dean/Principal</h2>
+                        <p style="color: #fff;">This Section is Managed By the Dean/Principal of ITM University </p>
+                        <a href="/dean_login"><button class="btn btn-primary"
+                                style="background-color: #f3aa92;border: none;">Login</button></a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 box p-3 mb-2 shadowlg">
+                    <div class="minbox p-3 ">
+                        <a href=""><i class="fa-solid fa-chalkboard-user pb-1 "></i></a>
+                        <h2 style="color: #fff;"> Handler & Admin</h2>
+                        <p style="color: #fff;">This Section is managed and view by the Grievance handler.                            </p>
+                        <a href="/admin"><button class="btn btn-primary"
+                                style="background-color: #f3aa92;border: none;">Login</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> <!---section end-->
+<%- include('./footer.ejs')  %>

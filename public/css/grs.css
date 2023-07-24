@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.section h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    color: #263A4F;
+}
+
+.mobile {
+    color: #213e94;
+}
+
+.logo {
+    color:#f3aa92;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+}
+
+.section i:hover {
+    color: black;
+}
+
+.navbar {
+    background-color: #213e94 !important;
+    z-index: 1;
+}
+.navfixed{
+    position: sticky !important;
+    top: 0px; 
+}
+#abc{
+    z-index: 0;
+}
+.menu,.menu1 {
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: 1.05rem !important;
+    text-transform: uppercase;
+}
+.menu2 ul li:hover{
+    background-color:#f3aa92;
+    transition: .5s !important;
+}
+.menu1{
+    background: #f3aa92 !important;
+}
+.para{
+    color: #213e94;
+    font-family: sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 19px;
+}
+.shadowlg{
+    box-shadow: 0 1rem 3rem rgba(var(--bs-body-color-rgb),.175)!important;
+}
+.box{
+    background-color: #213e94;
+}
+.minbox{
+    background-color: #213e94;
+    border: 3px solid white;
+}
+.box i{
+    font-size: 100px;
+    color: #f3aa92;
+}
+.footer{
+    background-color: #f8f8fb;
+}
+.footerlogo{
+    color:#f3aa92;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+.footerpa{
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    line-height: 2;
+}
+.footerh2{
+    font-family: sans-serif;
+    font-size:28px;
+    font-weight: 600;
+}
+
+
