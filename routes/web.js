@@ -1,5 +1,7 @@
 const express = require("express");
 const FrontController = require("../controllers/FrontController");
+const AdminController = require("../controllers/admin/admincontroller");
+const StudentController = require("../controllers/admin/StudentController");
 // const TeacherController = require("../controllers/TeacherController");
 const route = express.Router();
 
@@ -24,15 +26,15 @@ route.get('/register_page',FrontController.register_page)
 route.get('/register_page',FrontController.register_page)
 
 
-
-
-
-
-
-
-
-
 // Teacher Controller
 // route.get('/teacher/display',TeacherController.displayTeacher)
 
-module.exports = route
+// admin controller
+route.get('/admin/dashboard',AdminController.dashboard)
+route.get('/admin/login',AdminController.login)
+route.get('/admin/register',AdminController.register)
+
+// student controller
+route.get('/admin/addstudent',StudentController.addstudent)
+
+module.exports = route;
