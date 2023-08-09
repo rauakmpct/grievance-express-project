@@ -13,6 +13,9 @@ app.set('view engine','ejs');
 //connect db
 connectdb()
 
+//data get 
+app.use(express.urlencoded({extended:true}))
+
 // for image and css
 app.use(express.static('public'))
 

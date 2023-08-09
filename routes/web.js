@@ -1,6 +1,6 @@
 const express = require("express");
 const FrontController = require("../controllers/FrontController");
-const AdminController = require("../controllers/admin/admincontroller");
+const AdminController = require("../controllers/admin/AdminController");
 const StudentController = require("../controllers/admin/StudentController");
 // const TeacherController = require("../controllers/TeacherController");
 const route = express.Router();
@@ -33,6 +33,8 @@ route.get('/register_page',FrontController.register_page)
 route.get('/admin/dashboard',AdminController.dashboard)
 route.get('/admin/login',AdminController.login)
 route.get('/admin/register',AdminController.register)
+route.post('/admininsert',AdminController.admininsert)
+route.post('/admin/verifylogin',AdminController.verifylogin)
 
 // student controller
 route.get('/admin/addstudent',StudentController.addstudent)
