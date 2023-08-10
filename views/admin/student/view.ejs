@@ -1,0 +1,76 @@
+<%- include('../layoutes/header.ejs') %>
+    <%- include('../layoutes/sidebar.ejs') %>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper bg-warning ">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <!-- /.card -->
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">View Student</h3>
+                    Add Student
+                    </button>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <%=d._id %>
+                                </td>
+                                <td>
+                                    <%=d.name %>
+                                </td>
+
+                                <td>
+                                    <%=d.email %>
+                                </td>
+
+                                <td>
+                                    <%=d.password %>
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>password</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- Modal add student -->
+
+            <!-- modal add student end -->
+
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+
+        <%- include('../layoutes/footer.ejs') %>
