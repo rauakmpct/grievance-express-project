@@ -1,6 +1,7 @@
 const { findById, findByIdAndUpdate } = require('../../models/Admin');
 const StudentModel = require('../../models/Student')
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 class StudentController {
     static addstudent = async (req, res) => {
@@ -72,6 +73,46 @@ class StudentController {
         try {
             await StudentModel.findByIdAndDelete(req.params.id)
             res.redirect('/admin/addstudent')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static verifylogin = async (req, res) => {
+        try {
+            const { email, password } = req.body
+            if (email && password) {
+                const student = await StudentModel.findOne({ email: email })
+
+                // password check
+                if (student != null) {
+                    const ismatched = await bcrypt.compare(password, student.password)
+                    if (ismatched) {
+                        // Generate token
+                        const token = jwt.sign({ ID: student._id }, 'rahul12345sign');
+                        // console.log(token)
+                        res.cookie('token', token)
+                        res.redirect('/dashboard')
+
+                    } else {
+                        res.redirect('/')
+                    }
+
+                } else {
+                    res.redirect('/')
+                }
+            } else {
+                res.redirect('/')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static logout = async (req, res) => {
+        try {
+            console.log(req.body)
+
         } catch (error) {
             console.log(error)
         }
