@@ -1,9 +1,12 @@
 const AdminModel = require('../../models/Admin')
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 class AdminController {
     static dashboard = async (req, res) => {
         try {
-            res.render('/dashboard')
+            // console.log(req.data1)
+            const {name,email}=req.data1
+            res.render('admin/dashboard',{n:name})
         } catch (error) {
             console.log(error)
 
@@ -43,35 +46,38 @@ class AdminController {
         }
     }
 
-    static verifylogin = async (req, res) => {
-        try {
-            const { email, password } = req.body
-            if (email && password) {
-                const admin = await AdminModel.findOne({ email: email })
+    // static verifylogin = async (req, res) => {
+    //     try {
+    //         const { email, password } = req.body
+    //         if (email && password) {
+    //             const admin = await AdminModel.findOne({ email: email })
 
-                // password check
-                if (admin != null) {
-                    const ismatched = await bcrypt.compare(password, admin.password)
-                    if (ismatched) {
-                        res.redirect('/dashboard')
+    //             // password check
+    //             if (admin != null) {
+    //                 const ismatched = await bcrypt.compare(password, admin.password)
+    //                 if (ismatched) {
+    //                     const token = jwt.sign({ ID: student._id }, 'rahul12345sign');
+    //                     // console.log(token)
+    //                     res.cookie('token', token)
+    //                     res.redirect('/dashboard')
 
-                    } else {
-                        res.redirect('/admin/login')
+    //                 } else {
+    //                     res.redirect('/admin/login')
 
-                    }
+    //                 }
 
-                } else {
-                    res.redirect('/admin/login')
-                }
+    //             } else {
+    //                 res.redirect('/admin/login')
+    //             }
 
-            } else {
-                res.redirect('/admin/login')
-            }
+    //         } else {
+    //             res.redirect('/admin/login')
+    //         }
 
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
 }
 

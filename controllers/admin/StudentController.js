@@ -8,7 +8,8 @@ class StudentController {
         try {
             const data = await StudentModel.find().sort({ _id: -1 })
             // console.log(data)
-            res.render('admin/student/addstudent', { d: data })
+            const { name, email } = req.data1
+            res.render('admin/student/addstudent', { d: data, n: name })
 
         } catch (error) {
             console.log(error)
@@ -35,7 +36,8 @@ class StudentController {
             // res.render(req.params.id)
             const data = await StudentModel.findById(req.params.id)
             // console.log(data)
-            res.render('admin/student/view', { d: data })
+            const { name, email } = req.data1
+            res.render('admin/student/view', { d: data, n: name })
 
         } catch (error) {
             console.log(error)
@@ -46,8 +48,9 @@ class StudentController {
         try {
             // res.render(req.params.id)
             const data = await StudentModel.findById(req.params.id)
-            console.log(data)
-            res.render('admin/student/edit', { d: data })
+            // console.log(data)
+            const { name, email } = req.data1
+            res.render('admin/student/edit', { d: data, n: name })
 
         } catch (error) {
             console.log(error)
@@ -82,17 +85,26 @@ class StudentController {
         try {
             const { email, password } = req.body
             if (email && password) {
-                const student = await StudentModel.findOne({ email: email })
+                const user = await StudentModel.findOne({ email: email })
 
                 // password check
-                if (student != null) {
-                    const ismatched = await bcrypt.compare(password, student.password)
+                if (user != null) {
+                    const ismatched = await bcrypt.compare(password, user.password)
                     if (ismatched) {
-                        // Generate token
-                        const token = jwt.sign({ ID: student._id }, 'rahul12345sign');
-                        // console.log(token)
-                        res.cookie('token', token)
-                        res.redirect('/dashboard')
+                        if (user.role == 'admin') {
+                            // Generate token
+                            const token = jwt.sign({ ID: user._id }, 'rahul12345sign');
+                            // console.log(token)
+                            res.cookie('token', token)
+                            res.redirect('/dashboard')
+                        }
+                        if (user.role == 'student') {
+                            // Generate token
+                            const token = jwt.sign({ ID: user._id }, 'rahul12345sign');
+                            // console.log(token)
+                            res.cookie('token', token)
+                            res.redirect('/dashboard')
+                        }
 
                     } else {
                         res.redirect('/')
@@ -109,13 +121,54 @@ class StudentController {
         }
     }
 
+    static changepassword = async (req, res) => {
+        try {
+            const { name, email } = req.data1
+            res.render('admin/student/changepassword', { n: name })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static profile = async (req, res) => {
+        try {
+            const { name, email, phone, city, address } = req.data1
+            res.render('admin/student/profile', { n: name, e: email, p: phone, c: city, a: address })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static updateprofile = async (req, res) => {
+        try {
+            const { name, email, id } = req.data1
+            // console.log(req.body)
+            const update = await StudentModel.findByIdAndUpdate(id, {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+                phone: req.body.phone,
+                city: req.body.city,
+                address: req.body.address
+
+            })
+            res.redirect('/profile')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
     static logout = async (req, res) => {
         try {
-            console.log(req.body)
+            res.clearCookie("token")
+            res.redirect('/')
 
         } catch (error) {
             console.log(error)
         }
     }
+
+
 }
 module.exports = StudentController;
