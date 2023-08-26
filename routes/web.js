@@ -49,4 +49,7 @@ route.get('/logout',StudentController.logout)
 route.get('/changepassword',checkauth,StudentController.changepassword)
 route.get('/profile',checkauth,StudentController.profile)
 route.post('/updateprofile',checkauth,StudentController.updateprofile)
+route.post('/updatepassword',checkauth,StudentController.updatepassword)
+
+
 module.exports = route;

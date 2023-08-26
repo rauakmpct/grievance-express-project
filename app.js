@@ -9,6 +9,21 @@ const { connection } = require('mongoose')
 const cookieparser = require('cookie-parser')
 app.use(cookieparser())
 
+//for msg show
+let session = require('express-session')
+let flash = require('connect-flash');
+
+// for msg show use
+app.use(session({
+  secret: 'secret',
+  cookie: {maxAge:60000},
+  resave: false,
+  saveUninitialized: false,
+
+}));
+
+app.use(flash());
+
 
 // view engine ejs
 app.set('view engine','ejs');

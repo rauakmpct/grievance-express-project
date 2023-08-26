@@ -124,7 +124,10 @@ class StudentController {
     static changepassword = async (req, res) => {
         try {
             const { name, email } = req.data1
-            res.render('admin/student/changepassword', { n: name })
+            res.render('admin/student/changepassword', {
+                n: name, msg: req.flash('error'),
+                msg1: req.flash('success')
+            })
         } catch (error) {
             console.log(error)
         }
@@ -157,6 +160,47 @@ class StudentController {
             console.log(error)
         }
     }
+
+    static updatepassword = async (req, res) => {
+        try {
+            // console.log(req.body)
+            const { name, email, id } = req.data1
+            const { oldpassword, newpassword, cpassword } = req.body
+            if (oldpassword && newpassword && cpassword) {
+                const user = await StudentModel.findById(id)
+                // console.log(user)
+
+                // for password compareing
+                const ismatched = await bcrypt.compare(oldpassword, user.password)
+                if (!ismatched) {
+                    req.flash('error', 'Old Password is Incorrect')
+                    res.redirect('/changepassword')
+                } else {
+                    if (newpassword != cpassword) {
+                        req.flash('error', 'Newpassword and confirmpassword does not match')
+                        res.redirect('/changepassword')
+                    } else {
+                        const newhashpassword = await bcrypt.hash(newpassword, 10)
+                        const r = await StudentModel.findByIdAndUpdate(id, {
+                            password: newhashpassword,
+                        })
+                        req.flash('success', 'Password update sucessfully')
+                        res.redirect('/changepassword')
+                    }
+
+                }
+
+            } else {
+                req.flash('error', 'All Field Are Required')
+                res.redirect('/changepassword')
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
 
 
     static logout = async (req, res) => {
