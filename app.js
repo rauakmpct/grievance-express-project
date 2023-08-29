@@ -12,6 +12,9 @@ app.use(cookieparser())
 //for msg show
 let session = require('express-session')
 let flash = require('connect-flash');
+const fileUpload = require("express-fileupload");
+// for file upload
+app.use(fileUpload({useTempFiles: true}));
 
 // for msg show use
 app.use(session({

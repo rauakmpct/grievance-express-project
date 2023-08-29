@@ -5,8 +5,8 @@ class AdminController {
     static dashboard = async (req, res) => {
         try {
             // console.log(req.data1)
-            const {name,email}=req.data1
-            res.render('admin/dashboard',{n:name})
+            const {name,email,role}=req.data1
+            res.render('admin/dashboard',{n:name,role:role})
         } catch (error) {
             console.log(error)
 

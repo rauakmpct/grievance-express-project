@@ -8,8 +8,8 @@ class StudentController {
         try {
             const data = await StudentModel.find().sort({ _id: -1 })
             // console.log(data)
-            const { name, email } = req.data1
-            res.render('admin/student/addstudent', { d: data, n: name })
+            const { name, email, role } = req.data1
+            res.render('admin/student/addstudent', { d: data, n: name, role: role })
 
         } catch (error) {
             console.log(error)
@@ -17,15 +17,16 @@ class StudentController {
     }
     static studentinsert = async (req, res) => {
         try {
-            // res.render(req.body)
-            const { name, email, password } = req.body
-            const hashpassword = await bcrypt.hash(password, 10)
-            const result = new StudentModel({
-                name: name,
-                email: email,
-                password: hashpassword
-            })
-            await result.save();
+            console.log(req.files.image)
+            res.render(req.body)
+            // const { name, email, password } = req.body
+            // const hashpassword = await bcrypt.hash(password, 10)
+            // const result = new StudentModel({
+            //     name: name,
+            //     email: email,
+            //     password: hashpassword
+            // })
+            // await result.save();
             res.redirect('/admin/addstudent')
         } catch (error) {
             console.log(error)
@@ -36,8 +37,8 @@ class StudentController {
             // res.render(req.params.id)
             const data = await StudentModel.findById(req.params.id)
             // console.log(data)
-            const { name, email } = req.data1
-            res.render('admin/student/view', { d: data, n: name })
+            const { name, email,role } = req.data1
+            res.render('admin/student/view', { d: data, n: name, role: role })
 
         } catch (error) {
             console.log(error)
@@ -49,8 +50,8 @@ class StudentController {
             // res.render(req.params.id)
             const data = await StudentModel.findById(req.params.id)
             // console.log(data)
-            const { name, email } = req.data1
-            res.render('admin/student/edit', { d: data, n: name })
+            const { name, email, role } = req.data1
+            res.render('admin/student/edit', { d: data, n: name, role: role })
 
         } catch (error) {
             console.log(error)
@@ -123,9 +124,9 @@ class StudentController {
 
     static changepassword = async (req, res) => {
         try {
-            const { name, email } = req.data1
+            const { name, email, role } = req.data1
             res.render('admin/student/changepassword', {
-                n: name, msg: req.flash('error'),
+                n: name, role: role, msg: req.flash('error'),
                 msg1: req.flash('success')
             })
         } catch (error) {
@@ -135,8 +136,8 @@ class StudentController {
 
     static profile = async (req, res) => {
         try {
-            const { name, email, phone, city, address } = req.data1
-            res.render('admin/student/profile', { n: name, e: email, p: phone, c: city, a: address })
+            const { name, email, phone, city, address,role } = req.data1
+            res.render('admin/student/profile', { n: name, e: email, p: phone, c: city, a: address,role:role })
         } catch (error) {
             console.log(error)
         }
@@ -144,7 +145,7 @@ class StudentController {
 
     static updateprofile = async (req, res) => {
         try {
-            const { name, email, id } = req.data1
+            const { name, email, id, } = req.data1
             // console.log(req.body)
             const update = await StudentModel.findByIdAndUpdate(id, {
                 name: req.body.name,

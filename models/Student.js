@@ -28,6 +28,14 @@ const StudentSchema = new mongoose.Schema({
     role:{
         type:String,
         default:'student'
+    },
+    image:{
+        public_id:{
+            type:String,
+        },
+        url:{
+            type:String,
+        },
     }
 })
 const StudentModel=mongoose.model('student',StudentSchema)
