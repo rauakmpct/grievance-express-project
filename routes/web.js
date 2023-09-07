@@ -5,6 +5,7 @@ const StudentController = require("../controllers/admin/StudentController");
 // const TeacherController = require("../controllers/TeacherController");
 const route = express.Router();
 const checkauth = require('../middlewear/auth');
+const ComplaintController = require("../controllers/ComplaintController");
 
 // routing
  
@@ -50,6 +51,12 @@ route.get('/changepassword',checkauth,StudentController.changepassword)
 route.get('/profile',checkauth,StudentController.profile)
 route.post('/updateprofile',checkauth,StudentController.updateprofile)
 route.post('/updatepassword',checkauth,StudentController.updatepassword)
+
+
+
+// ComplaintController
+route.get('/addcomplaint',checkauth,ComplaintController.addcomplaint)
+route.post('/complaintinsert',checkauth,ComplaintController.complaintinsert)
 
 
 module.exports = route;

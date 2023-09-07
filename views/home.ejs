@@ -1,4 +1,9 @@
 <%- include('./header.ejs') %>
+<% if(msg.length> 0){ %>
+    <div class="alert alert-danger">
+            <%= msg %>
+    </div>
+    <% } %>
     <section> <!---section start-->
         <div id="abc" class="carousel slide carousel-fade">
             <div class="carousel-inner">

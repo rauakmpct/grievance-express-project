@@ -5,8 +5,8 @@ class AdminController {
     static dashboard = async (req, res) => {
         try {
             // console.log(req.data1)
-            const {name,email,role}=req.data1
-            res.render('admin/dashboard',{n:name,role:role})
+            const {name,email,role,image}=req.data1
+            res.render('admin/dashboard',{n:name,role:role,img:image})
         } catch (error) {
             console.log(error)
 
@@ -30,7 +30,7 @@ class AdminController {
     static admininsert = async (req, res) => {
         try {
             // console.log(req.body)
-            const { name, email, password } = req.body
+            const { name, email, password, } = req.body
             const hashpassword = await bcrypt.hash(password, 10)
             const result = new AdminModel({
                 name: name,
