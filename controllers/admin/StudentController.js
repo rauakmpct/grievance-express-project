@@ -14,8 +14,8 @@ class StudentController {
         try {
             const data = await StudentModel.find().sort({ _id: -1 })
             // console.log(data)
-            const { name, email, role,image } = req.data1
-            res.render('admin/student/addstudent', { d: data, n: name, role: role,img:image,msg:req.flash('success') })
+            const { name, email, role, image } = req.data1
+            res.render('admin/student/addstudent', { d: data, n: name, role: role, img: image, msg: req.flash('success') })
 
         } catch (error) {
             console.log(error)
@@ -53,8 +53,8 @@ class StudentController {
             // res.render(req.params.id)
             const data = await StudentModel.findById(req.params.id)
             // console.log(data)
-            const { name, email, role,image } = req.data1
-            res.render('admin/student/view', { d: data, n: name, role: role,img:image })
+            const { name, email, role, image } = req.data1
+            res.render('admin/student/view', { d: data, n: name, role: role, img: image })
 
         } catch (error) {
             console.log(error)
@@ -66,8 +66,8 @@ class StudentController {
             // res.render(req.params.id)
             const data = await StudentModel.findById(req.params.id)
             // console.log(data)
-            const { name, email, role,image } = req.data1
-            res.render('admin/student/edit', { d: data, n: name, role: role,img:image, msg: req.flash('message') })
+            const { name, email, role, image } = req.data1
+            res.render('admin/student/edit', { d: data, n: name, role: role, img: image, msg: req.flash('message') })
 
         } catch (error) {
             console.log(error)
@@ -155,15 +155,20 @@ class StudentController {
                             res.cookie('token', token)
                             res.redirect('/dashboard')
                         }
+                        // generate token for login security
+
 
                     } else {
+                        req.flash('error', 'email or passsword is incorrect')
                         res.redirect('/')
                     }
 
                 } else {
+                    req.flash('error', 'user not register user')
                     res.redirect('/')
                 }
             } else {
+                req.flash('error', 'email and password required')
                 res.redirect('/')
             }
         } catch (error) {
@@ -185,8 +190,8 @@ class StudentController {
 
     static profile = async (req, res) => {
         try {
-            const { name, email, phone, city, address, role,image } = req.data1
-            res.render('admin/student/profile', { n: name, e: email, p: phone, c: city, a: address, role: role,image,msg: req.flash('message')  })
+            const { name, email, phone, city, address, role, image } = req.data1
+            res.render('admin/student/profile', { n: name, e: email, p: phone, c: city, a: address, role: role, image, msg: req.flash('message') })
         } catch (error) {
             console.log(error)
         }
