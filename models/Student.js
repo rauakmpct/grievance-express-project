@@ -22,6 +22,9 @@ const StudentSchema = new mongoose.Schema({
     address:{
         type:String,
     },
+    course:{
+        type:String,
+    },
     role:{
         type:String,
         default:'student'

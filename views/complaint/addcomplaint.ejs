@@ -1,105 +1,109 @@
-<%-include('../admin/layoutes/header.ejs')%>
-    <%-include('../admin/layoutes/sidebar.ejs')%>
+<%- include('../admin/layoutes/header.ejs') %>
+  <%- include('../admin/layoutes/sidebar.ejs') %>
 
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper bg-warning ">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
 
+      </div>
+      <!-- /.content-header -->
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Main content -->
-            <div class="content">
-                <!-- /.card -->
+      <!-- Main content -->
+      <!-- /.card -->
 
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Display Complaint</h3>
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addstudent"
-                            style="float: right;">
-                            Add Complaint
-                        </button>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Image</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Image</th>
-                                    <th>Action</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-
-                <!--modal add student-->
-                <div class="modal fade" id="addstudent">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Add Complaint</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="/complaintinsert" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label for="">Complaint Type</label>
-                                        <input type="text" name="ctype" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Semester</label>
-                                        <select name="semester" id="" class="form-control">
-                                            <option>Select Semester</option>
-                                            <option>1st Semester</option>
-                                            <option>2nd Semester</option>
-                                            <option>3rd Semester</option>
-                                            <option>4th Semester</option>
-                                            <option>5th Semester</option>
-                                            <option>6th Semester</option>
-                                            <option>7th Semester</option>
-                                            <option>8th Semester</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Subject/Title</label>
-                                        <input type="text" name="subject" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Complaint Details</label>
-                                        <textarea name="cdetail" id="" class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Attach Supporting Files</label>
-                                        <input type="file" name="image" class="form-control" required>
-                                    </div>
-                                    <button class="btn btn-success" type="submit">Submit</button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!--modal end add student-->
-            </div>
-            <!-- /.content -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Display Complaints</h3>
+          <button type="button" class="btn btn-info" style="float: right;" data-toggle="modal"
+            data-target="#addstudent">
+            Add Compalint
+          </button>
         </div>
-        <!-- /.content-wrapper -->
-        <%-include('../admin/layoutes/footer.ejs')%>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+    <!--modal add student-->
+    <div class="modal fade" id="addstudent">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Complaint</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/complaintinsert" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="">Complaint Type</label>
+                            <input type="text" name="ctype" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Semester</label>
+                            <select name="semester" id="" class="form-control">
+                                <option>Select Semester</option>
+                                <option>1st Semester</option>
+                                <option>2nd Semester</option>
+                                <option>3rd Semester</option>
+                                <option>4th Semester</option>
+                                <option>5th Semester</option>
+                                <option>6th Semester</option>
+                                <option>7th Semester</option>
+                                <option>8th Semester</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Subject/Title</label>
+                            <input type="text" name="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Complaint Details</label>
+                            <textarea name="cdetail" id="" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Attach Supporting Files</label>
+                            <input type="file" name="image" class="form-control" required>
+                        </div>
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+      <!-- modal add student end -->
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    <%- include('../admin/layoutes/footer.ejs') %>

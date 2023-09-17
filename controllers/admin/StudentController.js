@@ -15,7 +15,7 @@ class StudentController {
             const data = await StudentModel.find().sort({ _id: -1 })
             // console.log(data)
             const { name, email, role, image } = req.data1
-            res.render('admin/student/addstudent', { d: data, n: name, role: role, img: image, msg: req.flash('success') })
+            res.render('admin/student/addstudent', { d: data, n: name, role: role,img:image, msg: req.flash('success'), msg1: req.flash('error') })
 
         } catch (error) {
             console.log(error)
@@ -32,18 +32,30 @@ class StudentController {
             })
             console.log(image_upload)
             const { name, email, password, image } = req.body
-            const hashpassword = await bcrypt.hash(password, 10)
-            const result = new StudentModel({
-                name: name,
-                email: email,
-                password: hashpassword,
-                image: {
-                    public_id: image_upload.public_id,
-                    url: image_upload.secure_url,
+            const student = await StudentModel.findOne({ email: email })
+            if (student) {
+                req.flash('error', 'email already exists')
+                res.redirect('/admin/addstudent')
+            } else {
+                if (name && email && password) {
+                    const hashpassword = await bcrypt.hash(password, 10)
+                    const result = new StudentModel({
+                        name: name,
+                        email: email,
+                        password: hashpassword,
+                        image: {
+                            public_id: image_upload.public_id,
+                            url: image_upload.secure_url,
+                        }
+                    })
+
+                    await result.save();
+                    req.flash('success', 'add student successfully')
+                    res.redirect('/admin/addstudent')
+                } else {
+                    req.flash('error', 'all field are required')
                 }
-            })
-            await result.save();
-            res.redirect('/admin/addstudent')
+            }
         } catch (error) {
             console.log(error)
         }
@@ -191,7 +203,7 @@ class StudentController {
     static profile = async (req, res) => {
         try {
             const { name, email, phone, city, address, role, image } = req.data1
-            res.render('admin/student/profile', { n: name, e: email, p: phone, c: city, a: address, role: role, image, msg: req.flash('message') })
+            res.render('admin/student/profile', { n: name, e: email, p: phone, c: city, a: address, role: role,img:image, msg: req.flash('message') })
         } catch (error) {
             console.log(error)
         }
@@ -201,13 +213,13 @@ class StudentController {
         try {
             // For Name On Dash
             const { name, email, id } = req.data1
-            // //    console.log(req.body)
+            //    console.log(req.body)
             // console.log(req.files.image) 
             if (req.files) {
                 // first find and destroy old image public id
                 const student = await StudentModel.findById(id)
                 const imageid = student.image.public_id
-                // console.log(imageid)
+                console.log(imageid)
                 await cloudinary.uploader.destroy(imageid)
                 const file = req.files.image
                 const image_upload = await cloudinary.uploader.upload(file.tempFilePath, ({
@@ -221,7 +233,7 @@ class StudentController {
                     address: req.body.address,
                     image: {
                         public_id: image_upload.public_id,
-                        url: image_upload.secure_url
+                        url: image_upload.secure_url,
                     }
                 }
             } else {
@@ -230,21 +242,13 @@ class StudentController {
                     email: req.body.email,
                     phone: req.body.phone,
                     city: req.body.city,
-                    address: req.body.address
+                    address: req.body.address,
                 }
             }
 
             const update = await StudentModel.findByIdAndUpdate(id, data)
+            req.flash('success','update successfully')
             res.redirect('/profile')
-            // const update = await StudentModel.findByIdAndUpdate(id, {
-            //     name: req.body.name,
-            //     email: req.body.email,
-            //     password: req.body.password,
-            //     phone: req.body.phone,
-            //     city: req.body.city,
-            //     address: req.body.address
-            // })
-            // res.redirect('/profile')
 
         } catch (error) {
             console.log(error)

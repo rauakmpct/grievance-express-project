@@ -27,49 +27,55 @@
               <%= msg %>
             </div>
             <% } %>
-          <table id="example1" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Image</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% d.forEach((item)=>{%>
-                <tr>
-                  <td>
-                    <%= item._id %>
-                  </td>
-                  <td>
-                    <%= item.name %>
-                  </td>
-                  <td>
-                    <%= item.email %>
-                  </td>
-                  <td>
-                    <img src="<%= item.image.url %>" alt="" width="50" style="border-radius: 20px;">
-                  </td>
-                  <td>
-                    <a href="/admin/studentview/<%= item._id%>" class="btn btn-info">View</a>
-                    <a href="/admin/studentedit/<%= item._id%>" class="btn btn-primary">Edit</a>
-                    <a href="/admin/studentdelete/<%= item._id%>" class="btn btn-danger">Delete</a>
-                  </td>
-                </tr>
-                <%})%>
+              <% if(msg1.length> 0){ %>
+                <div class="alert alert-danger">
+                  <%= msg1 %>
+                </div>
+                <% } %>
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% i=1 %>
+                        <% d.forEach((item)=>{%>
+                          <tr>
+                            <td>
+                              <%= i++ %>
+                            </td>
+                            <td>
+                              <%= item.name %>
+                            </td>
+                            <td>
+                              <%= item.email %>
+                            </td>
+                            <td>
+                              <img src="<%= item.image.url %>" alt="" width="50" style="border-radius: 20px;">
+                            </td>
+                            <td>
+                              <a href="/admin/studentview/<%= item._id%>" class="btn btn-info">View</a>
+                              <a href="/admin/studentedit/<%= item._id%>" class="btn btn-primary">Edit</a>
+                              <a href="/admin/studentdelete/<%= item._id%>" class="btn btn-danger">Delete</a>
+                            </td>
+                          </tr>
+                          <%})%>
 
-            </tbody>
-            <tfoot>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Action</th>
-              </tr>
-            </tfoot>
-          </table>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                      </tr>
+                    </tfoot>
+                  </table>
         </div>
         <!-- /.card-body -->
       </div>
@@ -107,14 +113,12 @@
                 <button class="btn btn-success" type="submit">Submit</button>
               </form>
             </div>
-
           </div>
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
       </div>
       <!-- modal add student end -->
-
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->

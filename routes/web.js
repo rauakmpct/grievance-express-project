@@ -36,6 +36,7 @@ route.get('/dashboard',checkauth,AdminController.dashboard)
 route.get('/admin/login',AdminController.login)
 route.get('/admin/register',AdminController.register)
 route.post('/admininsert',AdminController.admininsert)
+route.get('/displaycomplaint',checkauth,AdminController.displaycomplaint)
 // route.post('/admin/verifylogin',AdminController.verifylogin)
 
 // student controller

@@ -1,6 +1,7 @@
 const AdminModel = require('../../models/Admin')
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const ComplaintModel = require('../../models/Complaint');
 class AdminController {
     static dashboard = async (req, res) => {
         try {
@@ -79,6 +80,16 @@ class AdminController {
     //     }
     // }
 
+    static displaycomplaint = async (req,res) => { 
+        try{
+            const{name,email,role,image}=req.data1
+            const cdata = await ComplaintModel.find()
+            res.render('admin/displaycomplaint',{n:name,role:role,img:image,c:cdata})
+        } catch(error){
+            console.log(error)
+        }
+    }
 }
+
 
 module.exports = AdminController;
