@@ -36,6 +36,9 @@ const ComplaintSchema = new mongoose.Schema({
         type:String,
         require:true,
     },
+    comment:{
+        type:String,
+    },
     image:{
         public_id:{
             type:String,

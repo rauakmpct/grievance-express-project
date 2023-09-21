@@ -6,6 +6,7 @@ const StudentController = require("../controllers/admin/StudentController");
 const route = express.Router();
 const checkauth = require('../middlewear/auth');
 const ComplaintController = require("../controllers/ComplaintController");
+const CourseController = require('../controllers/admin/CourseController')
 
 // routing
  
@@ -58,6 +59,18 @@ route.post('/updatepassword',checkauth,StudentController.updatepassword)
 // ComplaintController
 route.get('/addcomplaint',checkauth,ComplaintController.addcomplaint)
 route.post('/complaintinsert',checkauth,ComplaintController.complaintinsert)
+route.get('/complaint/complaintview/:id',checkauth,ComplaintController.viewcomplaint)
+route.get('/complaint/complaintedit/:id',checkauth,ComplaintController.editcomplaint)
+route.post('/complaint/complaintupdate/:id',checkauth,ComplaintController.updatecomplaint)
+route.get('/complaint/complaintdelete/:id',checkauth,ComplaintController.complaintdelete)
+route.post('/updatestatus/:id',checkauth,ComplaintController.updatestatus)
+
+// course controller
+route.get('/admin/addcourse',checkauth,CourseController.addcourse)
+route.post('/courseinsert',checkauth,CourseController.courseinsert)
+route.get('/admin/courseview/:id',checkauth,CourseController.courseview)
+route.get('/admin/courseedit/:id',checkauth,CourseController.courseedit)
+route.get('/admin/coursedelete/:id',checkauth,CourseController.coursedelete)
 
 
 module.exports = route;

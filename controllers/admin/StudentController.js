@@ -202,59 +202,57 @@ class StudentController {
 
     static profile = async (req, res) => {
         try {
-            const { name, email, phone, city, address, role, image } = req.data1
-            res.render('admin/student/profile', { n: name, e: email, p: phone, c: city, a: address, role: role,img:image, msg: req.flash('message') })
+            const { name, email, phone, city, address, role, image,course } = req.data1
+            res.render('admin/student/profile', { n: name, e: email, p: phone, c: city, a: address, role: role,img:image,co:course, msg: req.flash('message') })
         } catch (error) {
             console.log(error)
         }
     }
-
     static updateprofile = async (req, res) => {
         try {
-            // For Name On Dash
-            const { name, email, id } = req.data1
-            //    console.log(req.body)
-            // console.log(req.files.image) 
-            if (req.files) {
-                // first find and destroy old image public id
+            // console.log(req.files.image)
+            const {name, email ,id}=req.data1
+            if(req.files){
                 const student = await StudentModel.findById(id)
                 const imageid = student.image.public_id
-                console.log(imageid)
+                // console.log(imageid)
                 await cloudinary.uploader.destroy(imageid)
                 const file = req.files.image
-                const image_upload = await cloudinary.uploader.upload(file.tempFilePath, ({
-                    folder: 'Profile Image'
-                }))
+                // image upload code
+                const image_upload = await cloudinary.uploader.upload(file.tempFilePath, {
+                    folder: 'profile Image'
+                })
                 var data = {
                     name: req.body.name,
                     email: req.body.email,
                     phone: req.body.phone,
                     city: req.body.city,
-                    address: req.body.address,
+                    adress: req.body.address,
                     image: {
                         public_id: image_upload.public_id,
                         url: image_upload.secure_url,
                     }
                 }
-            } else {
+                
+            }else{
                 var data = {
                     name: req.body.name,
                     email: req.body.email,
                     phone: req.body.phone,
                     city: req.body.city,
-                    address: req.body.address,
+                    adress: req.body.address,
                 }
             }
-
-            const update = await StudentModel.findByIdAndUpdate(id, data)
-            req.flash('success','update successfully')
+        
+            // console.log(req.body)
+            await StudentModel.findByIdAndUpdate(id,data)
+            // req.flash('success','update successfully')
             res.redirect('/profile')
-
         } catch (error) {
             console.log(error)
         }
-
     }
+
     static updatepassword = async (req, res) => {
         try {
             // console.log(req.body)
