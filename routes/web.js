@@ -66,7 +66,7 @@ route.get('/complaint/complaintdelete/:id',checkauth,ComplaintController.complai
 route.post('/updatestatus/:id',checkauth,ComplaintController.updatestatus)
 
 // course controller
-route.get('/admin/addcourse',checkauth,CourseController.addcourse)
+route.get('/addcourse',checkauth,CourseController.addcourse)
 route.post('/courseinsert',checkauth,CourseController.courseinsert)
 route.get('/admin/courseview/:id',checkauth,CourseController.courseview)
 route.get('/admin/courseedit/:id',checkauth,CourseController.courseedit)

@@ -30,7 +30,7 @@ class StudentController {
             const image_upload = await cloudinary.uploader.upload(file.tempFilePath, {
                 folder: 'Profile Image'
             })
-            console.log(image_upload)
+            // console.log(image_upload)
             const { name, email, password, image } = req.body
             const student = await StudentModel.findOne({ email: email })
             if (student) {
@@ -145,6 +145,7 @@ class StudentController {
 
     static verifylogin = async (req, res) => {
         try {
+            // console.log(req.body)
             const { email, password } = req.body
             if (email && password) {
                 const user = await StudentModel.findOne({ email: email })
@@ -152,6 +153,8 @@ class StudentController {
                 // password check
                 if (user != null) {
                     const ismatched = await bcrypt.compare(password, user.password)
+                    // const ismatched = true
+                    // console.log(ismatched)
                     if (ismatched) {
                         if (user.role == 'admin') {
                             // Generate token
@@ -246,7 +249,7 @@ class StudentController {
         
             // console.log(req.body)
             await StudentModel.findByIdAndUpdate(id,data)
-            // req.flash('success','update successfully')
+            req.flash('success','update successfully')
             res.redirect('/profile')
         } catch (error) {
             console.log(error)
