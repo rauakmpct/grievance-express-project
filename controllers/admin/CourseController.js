@@ -1,13 +1,5 @@
 const CourseModel = require("../../models/Course")
 const bcrypt = require('bcrypt')
-// const jwt = require('jsonwebtoken')
-const cloudinary = require('cloudinary').v2;
-
-cloudinary.config({
-    cloud_name: 'ddc3epubs',
-    api_key: '433914787825219',
-    api_secret: 'J0gZRtPMMvc70LUC9QNTlgpBNjI'
-});
 
 class CourseController {
 
@@ -15,52 +7,67 @@ class CourseController {
         try {
             const { name, email, image, role } = req.data1
             const odata = await CourseModel.find()
-            res.render('admin/course/addcourse', { n: name, img: image, role, role, o: odata })
+            res.render('admin/course/addcourse', { n: name, o: odata, role: role, img: image })
         } catch (error) {
             console.log(error)
         }
     }
     static courseinsert = async (req, res) => {
         try {
+            // console.log(req.body)
             const { cname } = req.body
             const result = new CourseModel({
                 cname: cname,
             })
             await result.save()
-            // console.log(result)
-            res.redirect('/admin/addcourse')
+            res.redirect('/addcourse')
         } catch (error) {
             console.log(error)
         }
     }
+
     static courseview = async (req, res) => {
         try {
-            // console.log(req.params.id)
-            const { name, email, image, role } = req.data1
+            const { name, email, role, image,} = req.data1
             const odata = await CourseModel.findById(req.params.id)
-            console.log(odata)
-            res.render('admin/course/view', { n: name, img: image, role: role, o: odata })
+            res.render('admin/course/view', { n: name, role: role, o: odata, img: image })
         } catch (error) {
             console.log(error)
         }
     }
+
     static courseedit = async (req, res) => {
         try {
-            const { name, email, image, role } = req.data1
+            const { name, email, role, image } = req.data1
             const odata = await CourseModel.findById(req.params.id)
-            res.render('admin/course/edit', { n: name, img: image, role: role, o: odata })
+            res.render('admin/course/edit', { n: name, o: odata, role: role, img: image })
         } catch (error) {
             console.log(error)
         }
     }
+
+    static courseupdate = async (req, res) => {
+        try {
+            const { cname } = req.body
+            var data = {
+                cname: cname,
+            }
+            const id = req.params.id
+            await CourseModel.findByIdAndUpdate(id, data)
+            res.redirect('/addcourse')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     static coursedelete = async (req, res) => {
         try {
-            const {name,email}=req.data1
-            const odata = await CourseModel.findByIdAndDelete(req.params.id)
+            await CourseModel.findByIdAndDelete(req.params.id)
             res.redirect('/addcourse')
         } catch (error) {
             console.log(error)
         }
     }
 }
+
 module.exports = CourseController

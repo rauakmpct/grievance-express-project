@@ -14,8 +14,8 @@ class StudentController {
         try {
             const data = await StudentModel.find().sort({ _id: -1 })
             // console.log(data)
-            const { name, email, role, image } = req.data1
-            res.render('admin/student/addstudent', { d: data, n: name, role: role,img:image, msg: req.flash('success'), msg1: req.flash('error') })
+            const { name, email, role, image,cname } = req.data1
+            res.render('admin/student/addstudent', { d: data, n: name, role: role,img:image,c:cname, msg: req.flash('success'), msg1: req.flash('error') })
 
         } catch (error) {
             console.log(error)
@@ -135,7 +135,6 @@ class StudentController {
     static studentdelete = async (req, res) => {
         try {
             const { name, email, role } = req.data1
-
             await StudentModel.findByIdAndDelete(req.params.id)
             res.redirect('/admin/addstudent')
         } catch (error) {
@@ -193,9 +192,9 @@ class StudentController {
 
     static changepassword = async (req, res) => {
         try {
-            const { name, email, role } = req.data1
+            const { name, email, role,image } = req.data1
             res.render('admin/student/changepassword', {
-                n: name, role: role, msg: req.flash('error'),
+                n: name, role: role,img:image, msg: req.flash('error'),
                 msg1: req.flash('success')
             })
         } catch (error) {

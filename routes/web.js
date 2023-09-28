@@ -65,11 +65,12 @@ route.post('/complaint/complaintupdate/:id',checkauth,ComplaintController.update
 route.get('/complaint/complaintdelete/:id',checkauth,ComplaintController.complaintdelete)
 route.post('/updatestatus/:id',checkauth,ComplaintController.updatestatus)
 
-// course controller
+//course controller
 route.get('/addcourse',checkauth,CourseController.addcourse)
 route.post('/courseinsert',checkauth,CourseController.courseinsert)
 route.get('/admin/courseview/:id',checkauth,CourseController.courseview)
 route.get('/admin/courseedit/:id',checkauth,CourseController.courseedit)
+route.post('/admin/courseupdate/:id',checkauth,CourseController.courseupdate)
 route.get('/admin/coursedelete/:id',checkauth,CourseController.coursedelete)
 
 

@@ -20,17 +20,17 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>S.No</th>
                                 <th>Course</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            <% i=1 %>
                             <% o.forEach((item)=>{ %>
                                 <tr>
                                     <td>
-                                        <%= item._id %>
+                                        <%= i++ %>
                                     </td>
                                     <td>
                                         <%= item.cname %>
@@ -46,7 +46,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Id</th>
+                                <th>S.No</th>
                                 <th>Course</th>
                                 <th>Action</th>
                             </tr>
