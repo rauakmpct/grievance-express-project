@@ -46,17 +46,16 @@ class CourseController {
         }
     }
 
-    static courseupdate = async (req, res) => {
-        try {
-            const { cname } = req.body
-            var data = {
-                cname: cname,
-            } 
-            const id = req.params.id
-            await CourseModel.findByIdAndUpdate(id, data)
+    static courseupdate = async(req,res)=>{
+        try{
+            const{cname}= req.body
+            const update = await CourseModel.findByIdAndUpdate(req.params.id,{
+                cname:cname,
+            })
+            // console.log(update);
             res.redirect('/addcourse')
-        } catch (error) {
-            console.log(error)
+        }catch(error){
+            console.log(error);
         }
     }
 

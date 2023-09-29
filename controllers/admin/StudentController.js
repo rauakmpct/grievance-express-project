@@ -14,8 +14,8 @@ class StudentController {
         try {
             const data = await StudentModel.find().sort({ _id: -1 })
             // console.log(data)
-            const { name, email, role, image,cname } = req.data1
-            res.render('admin/student/addstudent', { d: data, n: name, role: role,img:image,c:cname, msg: req.flash('success'), msg1: req.flash('error') })
+            const { name, email, role, image,course } = req.data1
+            res.render('admin/student/addstudent', { d: data, n: name, role: role,img:image,course:course, msg: req.flash('success'), msg1: req.flash('error') })
 
         } catch (error) {
             console.log(error)
@@ -31,18 +31,19 @@ class StudentController {
                 folder: 'Profile Image'
             })
             // console.log(image_upload)
-            const { name, email, password, image } = req.body
+            const { name, email, password, image,course } = req.body
             const student = await StudentModel.findOne({ email: email })
             if (student) {
                 req.flash('error', 'email already exists')
                 res.redirect('/admin/addstudent')
             } else {
-                if (name && email && password) {
+                if (name && email && password && course ) {
                     const hashpassword = await bcrypt.hash(password, 10)
                     const result = new StudentModel({
                         name: name,
                         email: email,
                         password: hashpassword,
+                        course:course,
                         image: {
                             public_id: image_upload.public_id,
                             url: image_upload.secure_url,
