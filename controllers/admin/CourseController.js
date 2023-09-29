@@ -28,9 +28,9 @@ class CourseController {
 
     static courseview = async (req, res) => {
         try {
-            const { name, email, role, image,} = req.data1
             const odata = await CourseModel.findById(req.params.id)
-            res.render('admin/course/view', { n: name, role: role, o: odata, img: image })
+            const { name, email, role, image,cname} = req.data1
+            res.render('admin/course/view', { n: name, role: role, o: odata, img: image,c:cname })
         } catch (error) {
             console.log(error)
         }
@@ -51,7 +51,7 @@ class CourseController {
             const { cname } = req.body
             var data = {
                 cname: cname,
-            }
+            } 
             const id = req.params.id
             await CourseModel.findByIdAndUpdate(id, data)
             res.redirect('/addcourse')
